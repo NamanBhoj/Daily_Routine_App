@@ -1,4 +1,9 @@
 import "package:flutter/material.dart";
+import 'Tileinfo.dart';
+import 'ListOfTiles.dart';
+import 'AddTaskScreen.dart';
+import 'package:provider/provider.dart';
+import 'Task_Data.dart';
 
 class Task extends StatelessWidget {
   @override
@@ -6,7 +11,10 @@ class Task extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black26,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (context) => AddTaskScreen());
+        },
         child: Icon(Icons.add),
         backgroundColor: Colors.black,
       ),
@@ -39,7 +47,7 @@ class Task extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  '10 TASK FOR TODAY',
+                  '${Provider.of<TaskData>(context).tasks.length} total task for the day',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -53,6 +61,8 @@ class Task extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: EdgeInsets.fromLTRB(10, 0, 40, 0),
+              child: ListOfTiles(),
               height: 300,
               decoration: BoxDecoration(
                   color: Colors.white,
