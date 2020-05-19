@@ -1,48 +1,31 @@
 import 'package:flutter/material.dart';
 
+import 'Task_Data.dart';
+import 'package:provider/provider.dart';
 // I HAVE DONE GLOBAL STATE MANAGEMENT HERE WHERE I HAVE SHARED THE DATA
 // VARIABLE OF OUR CHECKBOX WITH THE STRING.
+//Now we are using  provider package for state management
 
-class TileInfo extends StatefulWidget {
-  final String text;
+class TileInfo extends StatelessWidget {
   final bool checked;
-  TileInfo({@required this.text, this.checked});
+  final String text;
+  final Function checkboxCallback;
 
-  @override
-  _TileInfoState createState() => _TileInfoState();
-}
+  TileInfo({
+    this.checked,
+    this.text,
+    this.checkboxCallback,
+  });
 
-class _TileInfoState extends State<TileInfo> {
-  bool isChecked = true;
   @override
   Widget build(BuildContext context) {
     return ListTile(
         title: Text(
-          widget.text,
+          text,
           style: TextStyle(
               fontSize: 20.0,
-              decoration: isChecked ? TextDecoration.lineThrough : null),
+              decoration: checked ? TextDecoration.lineThrough : null),
         ),
-        trailing: TaskCheckBox(
-            Checked: isChecked,
-            toperform: (newvalue) {
-              setState(() {
-                isChecked = newvalue;
-              });
-            }));
-  }
-}
-
-class TaskCheckBox extends StatelessWidget {
-  bool Checked;
-  Function toperform;
-
-  TaskCheckBox({@required this.Checked, @required this.toperform});
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      value: Checked,
-      onChanged: toperform,
-    );
+        trailing: Checkbox(value: checked, onChanged: checkboxCallback));
   }
 }

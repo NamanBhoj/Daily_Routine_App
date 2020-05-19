@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'Task.dart';
+import 'package:provider/provider.dart';
+import 'Task_Data.dart';
+import 'TaskInfo.dart';
 
 class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String taskadded;
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -23,6 +28,9 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (newtask) {
+                taskadded = newtask;
+              },
             ),
             SizedBox(
               height: 20.0,
@@ -30,7 +38,6 @@ class AddTaskScreen extends StatelessWidget {
             FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
-              onPressed: () {},
               padding: EdgeInsets.all(10.0),
               child: Text(
                 'Add',
@@ -40,6 +47,12 @@ class AddTaskScreen extends StatelessWidget {
                     color: Colors.white),
               ),
               color: Colors.black,
+              onPressed: () {
+                Provider.of<TaskData>(context, listen: false)
+                    .addtask(taskadded ?? 'task added');
+                Navigator.pop(context);
+                print('hello');
+              },
             )
           ],
         ),

@@ -6,4 +6,15 @@ class TaskData extends ChangeNotifier {
     TaskInfo(name: "Buy  Milk"),
     TaskInfo(name: 'Get Sugar')
   ];
+
+  void addtask(String taskadded) {
+    final task1 = TaskInfo(name: taskadded);
+    tasks.add(task1);
+    notifyListeners();
+  }
+
+  void updateTask(TaskInfo tasks) {
+    tasks.ToggleDone();
+    notifyListeners();
+  }
 }

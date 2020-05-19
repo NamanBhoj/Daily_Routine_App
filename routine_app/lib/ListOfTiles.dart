@@ -11,6 +11,9 @@ class ListOfTiles extends StatelessWidget {
         return TileInfo(
           text: Provider.of<TaskData>(context).tasks[index].name,
           checked: Provider.of<TaskData>(context).tasks[index].isDone,
+          checkboxCallback: (checkboxstate) {
+            TaskData().updateTask(TaskData().tasks[index]);
+          },
         );
       },
       itemCount: Provider.of<TaskData>(context).tasks.length,
